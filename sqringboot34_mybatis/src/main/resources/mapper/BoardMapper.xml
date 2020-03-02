@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ksmart.springboot34_34_mybatis.mapper.BoardMapper">
+	<select id="getBoardRowCount" resultType="int">
+		SELECT COUNT(*) FROM tb_board;
+	</select>
+	
+	<select id="boardList" parameterType="map" resultType="Board">
+		SELECT
+			board_no AS bNo
+			, board_title AS bTitle
+			, board_content AS bContent
+			, board_user AS bUser
+			, board_date AS bDate
+		FROM
+			tb_board
+		LIMIT #{startRow},#{rowPerPage};
+	</select>
+
+</mapper>

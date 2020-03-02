@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회원등록</title>
+</th:block>
+
+<th:block layout:fragment="customContents">	
+	<form th:action="@{/gInsert}" method="post">
+		<table border="1">
+			<tr>
+				<td>상품코드</td>
+				<td>
+					<input type="text" name="gCode">
+				</td>
+			</tr>
+			<tr>
+				<td>상품명</td>
+				<td>
+					<input type="text" name="gName">
+				</td>
+			</tr>		
+			<tr>
+				<td>분류</td>
+				<td>
+					<input type="text" name="gCate">
+				</td>
+			</tr>
+			<tr>
+				<td>가격</td>
+				<td>
+					<input type="text" name="gPrice">
+				</td>
+			</tr>
+			<tr>
+				<td>color</td>
+				<td>
+					<input type="text" name="gColor">
+				</td>
+			</tr>
+			<tr>
+				<td>size</td>
+				<td>
+					<input type="text" name="gSize">
+				</td>
+			</tr>
+			<tr>
+				<td>상세</td>
+				<td>
+					<input type="text" name="gDesc">
+				</td>
+			</tr>
+			<tr>
+				<td>회원등록</td>
+				<td colspan="2" style="text-align:center;">
+					<input type="submit" value="회원등록">
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+</th:block>
+</html>

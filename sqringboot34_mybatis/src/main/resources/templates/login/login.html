@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>index</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<table border="1">
+		<form th:action="@{/login}" method="post">
+			<tr>
+				<td>회원아이디</td>
+				<td>
+					<input type="text" name="mId">
+				</td>
+			</tr>
+			<tr>
+				<td>회원패스워드</td>
+				<td>
+					<input type="text" name="mPw">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<input type="submit" name="회원로그인">
+					<label th:text="${result != null}? ${result}:''"></label>
+				</td>
+			</tr>
+		</form>
+	</table>
+</th:block>
+
+</html>

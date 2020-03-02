@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>상품수정</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<form th:action="@{/gUpdate}" method="post">
+		<input type="hidden" name="mId" th:value="${goods.mId}">
+		<table border="1">
+
+				<tr>
+					<td>상품코드</td>
+					<td>
+						<input type="text" name="gCode" th:value="${goods.gCode}">
+					</td>
+				</tr>
+				<tr>
+					<td>상품명</td>
+					<td>
+						<input type="text" name="gName" th:value="${goods.gName}">
+					</td>
+				</tr>		
+				<tr>
+					<td>분류</td>
+					<td>
+						<input type="text" name="gCate" th:value="${goods.gCate}">
+					</td>
+				</tr>
+				<tr>
+					<td>가격</td>
+					<td>
+						<input type="text" name="gPrice" th:value="${goods.gPrice}">
+					</td>
+				</tr>
+				<tr>
+					<td>color</td>
+					<td>
+						<input type="text" name="gColor" th:value="${goods.gColor}">
+					</td>
+				</tr>
+				<tr>
+					<td>size</td>
+					<td>
+						<input type="text" name="gSize" th:value="${goods.gSize}">
+					</td>
+				</tr>
+				<tr>
+					<td>등록date</td>
+					<td>
+						<input type="text" name="gDate" th:value="${goods.gDate}">
+					</td>
+				</tr>
+				<tr>
+					<td>상세</td>
+					<td>
+						<input type="text" name="gDesc" th:value="${goods.gDesc}">
+					</td>
+				</tr>
+				<tr>
+					<td>상품수정</td>
+					<td colspan="2" style="text-align:center;">
+						<input type="submit" value="상품수정">
+					</td>
+				</tr>
+		</table>
+	</form>
+</th:block>
+</html>

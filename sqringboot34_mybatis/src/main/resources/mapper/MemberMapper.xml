@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ksmart.springboot34_34_mybatis.mapper.MemberMapper">
+
+	
+	<delete id="mDelete" parameterType="String">
+		DELETE FROM tb_member WHERE m_id=#{mId};
+	</delete>
+	
+	<resultMap type="Member" id="memberResultMap">
+		<result property="mId" column="m_id"/>
+		<result property="mPw" column="m_pw"/>
+		<result property="mLevel" column="m_level"/>
+		<result property="mName" column="m_name"/>
+		<result property="mEmail" column="m_email"/>
+	</resultMap>
+		
+	<select id="getSelectList" parameterType="String" resultMap="memberResultMap">
+		SELECT 
+			m_id,
+			m_pw,
+			m_level,
+			m_name,
+			m_email
+		FROM 
+			tb_member
+		WHERE
+			${sk} LIKE CONCAT('%',#{sv},'%');
+	</select>
+	
+	<select id="selectForUpdate" parameterType="String" resultMap="memberResultMap">
+		SELECT m_id, m_pw, m_level, m_name, m_email
+		FROM tb_member
+		WHERE m_id=#{mId};
+	</select>
+	
+	<update id="mUpdate" parameterType="Member">
+		UPDATE tb_member
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="mPw neq null and mPw neq ''.toString()">
+				m_pw	=	#{mPw},
+			</if>
+			<if test="mLevel neq null and mLevel neq ''.toString()">
+				m_level	=	#{mLevel},
+			</if>
+			<if test="mName neq null and mName neq ''.toString()">
+				m_name	=	#{mName},
+			</if>
+			<if test="mEmail neq null and mEmail neq ''.toString()">
+				m_email	=	#{mEmail},	
+			</if>
+			
+		</trim>
+		WHERE 
+			m_id	=	#{mId};
+	</update>
+	
+	<insert id="mInsert" parameterType="Member">
+		INSERT INTO tb_member (m_id,m_pw,m_level,m_name,m_email)
+		VALUES(#{mId},#{mPw},#{mLevel},#{mName},#{mEmail});
+	</insert>
+	
+	<select id="getMemberList" resultType="Member">
+		SELECT 
+			m_id AS mId,
+			m_pw AS mPw,
+			m_level AS mLevel,
+			m_name AS mName,
+			m_email AS mEmail
+		FROM 
+			tb_member
+	</select>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.or.ksmart.springboot34_34_mybatis.mapper.GoodsMapper">
+ 	<insert id="goodsInsert" parameterType="kr.or.ksmart.springboot34_34_mybatis.domain.Goods">
+ 		INSERT INTO tb_goods
+		(g_code, m_id, g_name, g_cate, g_price, g_color, g_size, g_date, g_desc)
+		VALUES (#{gCode}, 'id001', #{gName}, #{gCate}, #{gPrice}, #{gColor}, #{gSize}, NOW(), #{gDesc});
+ 	</insert>
+	
+	<resultMap type="kr.or.ksmart.springboot34_34_mybatis.domain.Goods" id="goodsResultMap">
+		<result property="gCode" column="g_code"/>
+		<result property="mId" column="m_id"/>
+		<result property="gName" column="g_name"/>
+		<result property="gCate" column="g_cate"/>
+		<result property="gPrice" column="g_price"/>
+		<result property="gColor" column="g_color"/>
+		<result property="gSize" column="g_size"/>
+		<result property="gDate" column="g_date"/>
+		<result property="gDesc" column="g_desc"/>
+	</resultMap>
+	<select id="goodsSearchlist" resultMap="goodsResultMap" parameterType="String">
+		SELECT 
+			g_code
+			, m_id
+			, g_name
+			, g_cate
+			, g_price
+			, g_color
+			, g_size
+			, g_date
+			, g_desc
+		FROM 
+			tb_goods
+		WHERE
+			${sk} LIKE CONCAT('%',#{sv},'%') ;
+	</select>
+
+
+ 	<select id="goodslist" resultType="kr.or.ksmart.springboot34_34_mybatis.domain.Goods">
+ 		SELECT 
+			g_code AS gCode
+			, m_id AS mId
+			, g_name AS gName
+			, g_cate AS gCate
+			, g_price AS gPrice
+			, g_color AS gColor
+			, g_size AS gSize
+			, g_date AS gDate
+			, g_desc AS gDesc
+		FROM 
+			tb_goods;
+ 	</select>
+ 	
+ 	<select id="goodsUpdateForm" parameterType="String" resultType="kr.or.ksmart.springboot34_34_mybatis.domain.Goods">
+ 		 SELECT 
+			g_code AS gCode
+			, m_id AS mId
+			, g_name AS gName
+			, g_cate AS gCate
+			, g_price AS gPrice
+			, g_color AS gColor
+			, g_size AS gSize
+			, g_date AS gDate
+			, g_desc AS gDesc
+		FROM 
+			tb_goods
+		WHERE
+			g_code=#{gCode};
+ 	</select>
+ 	
+ 	<update id="goodsUpdate" parameterType="kr.or.ksmart.springboot34_34_mybatis.domain.Goods">
+ 		UPDATE tb_goods
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="mId neq null and mId neq ''.toString()">
+				m_id=#{mId},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_name=#{gName},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_cate=#{gCate},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_price=#{gPrice},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_color=#{gColor},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_size=#{gSize},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_date=#{gDate},
+			</if>
+			<if test="mId neq null and mId neq ''.toString()">
+				g_desc=#{gDesc},
+			</if>
+		</trim>	
+		WHERE g_code=#{gCode};
+ 	</update>
+ 	<delete id="goodsDelete" parameterType="String">
+ 		DELETE FROM tb_goods WHERE g_code =#{gCode};
+ 	</delete>
+ 
+ 
+ </mapper>

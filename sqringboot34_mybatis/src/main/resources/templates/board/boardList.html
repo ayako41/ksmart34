@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회원등록</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<table border="1">
+		<tr>
+			<th>bNo</th>
+			<th>bTitle</th>
+			<th>bContent</th>
+			<th>bUser</th>
+			<th>bDate</th>
+		</tr>
+		<tr th:each="L:${boardList}">
+			<td th:text="${#strings.abbreviate(L.bNo,10)}"></td>
+			<td th:text="${#strings.abbreviate(L.bTitle,20)}"></td>
+			<td th:text="${#strings.abbreviate(L.bContent,25)}"></td>
+			<td th:text="${#strings.abbreviate(L.bUser,15)}"></td>
+			<td th:text="${#strings.abbreviate(L.bDate,15)}"></td>
+		</tr>
+	</table>
+	
+	<ul>
+	<a th:href="@{/boardList}">最初のページ</a>
+	<a th:if="${currentPage} >1" th:href="@{/boardList(currentPage=${currentPage}-1)}">前</a>
+	<a th:if="${currentPage}-1" th:href="@{/boardList(currentPage=${currentPage}-1)}">前</a>
+	<th:block th:each="num:${#numbers.sequence(startPageNum,endPageNum)}">
+		<span th:if="${currentPage == num}" 
+		th:text="${'['+ num +']'}"></span>
+		<a th:unless="${currentPage == num}" 
+		th:text="${'['+ num +']'}" 
+		th:href="@{/boardList(currentPage=${num})}"></a>
+	</th:block>
+	<a th:if="${currentPage} <${lastPage}" th:href="@{/boardList(currentPage=${currentPage+1})}">次</a>
+	<a th:href="@{/boardList(currentPage=${lastPage})}">最後のページ</a>
+	</ul>
+	
+</th:block>
+</html>
